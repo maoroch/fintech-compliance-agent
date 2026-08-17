@@ -72,45 +72,45 @@ class DecisionEngine:
         audit: Optional[AuditAdjustment] = None,
         kyc: Optional[KYCDossierInfo] = None
     ) -> Tuple[List[TransactionRecord], float]:
+        """
+        Universal, dynamic covenant calculation engine.
+        No hardcoded clause numbers (6.1, 6.2, 6.3). Performs 100% exact Python float arithmetic
+        based on semantic clause properties (Ratio vs Absolute Sum, Capex vs EBITDA audit add-backs, KYC Related Parties).
+        """
+        def_lower = (clause.numerator_definition or "").lower()
 
-        if clause_no == "6.1":
-            return self._compute_61_actual(clause, transactions, audit)
+        # 1. Related Party / KYC Filter
+        if clause.references_kyc or clause.metric_name == "RELATED_PARTY_LIMIT" or any(w in def_lower for w in ["связан", "аффилир", "бенефиц", "related"]):
+            related_entities = kyc.related_parties_20plus if (kyc and kyc.related_parties_20plus) else (kyc.related_parties if kyc else [])
+            related_txns = []
+            if related_entities:
+                for t in transactions:
+                    for entity in related_entities:
+                        if is_entity_match(t.counterparty, entity) or entity.lower() in t.description.lower():
+                            related_txns.append(t)
+                            break
+            if related_txns:
+                return related_txns, self._sum_usd(related_txns)
+            return [], 0.0
 
-        elif clause_no == "6.2":
-            return self._compute_62_actual(clause, transactions, audit)
-
-        elif clause_no == "6.3":
-            return self._compute_63_actual(clause, transactions, kyc)
-
-        # Generic fallback using contract clause numerator definition
+        # 2. Categorize Numerator Transactions via Categorizer
         numerator_txns = self.categorizer.categorize(
             definition=clause.numerator_definition,
             transactions=transactions,
             metric_type=clause.metric_name
         )
-        return numerator_txns, self._sum_usd(numerator_txns)
-
-    def _compute_61_actual(
-        self,
-        clause: CovenantClause,
-        transactions: List[TransactionRecord],
-        audit: Optional[AuditAdjustment] = None
-    ) -> Tuple[List[TransactionRecord], float]:
-
-        # Categorize numerator transactions via contract clause definition
-        numerator_txns = self.categorizer.categorize(
-            definition=clause.numerator_definition,
-            transactions=transactions,
-            metric_type=clause.metric_name
-        )
-
         numerator_sum = self._sum_usd(numerator_txns)
 
-        # Apply audit adjustment only if clause explicitly references audit adjustments
+        # 3. Apply Audit Adjustments dynamically based on metric type
         if clause.references_audit_adjustment and audit:
-            numerator_sum += audit.ebitda_addbacks_total
+            if "capex" in def_lower or "капитал" in def_lower:
+                numerator_sum += audit.capex_reclassifications_total
+            elif "ebitda" in def_lower or "прибыль" in def_lower or "доход" in def_lower:
+                numerator_sum += audit.ebitda_addbacks_total
+            else:
+                numerator_sum += (audit.ebitda_addbacks_total + audit.capex_reclassifications_total)
 
-        # Categorize denominator transactions if test is ratio-based
+        # 4. Handle Ratio-based Tests (Numerator / Denominator)
         if clause.denominator_definition:
             denominator_txns = self.categorizer.categorize(
                 definition=clause.denominator_definition,
@@ -118,66 +118,10 @@ class DecisionEngine:
                 metric_type="RATIO_TEST"
             )
             denominator_sum = self._sum_usd(denominator_txns)
-
             if denominator_sum > 0:
                 return numerator_txns, round(numerator_sum / denominator_sum, 2)
 
-        return numerator_txns, numerator_sum
-
-    def _compute_62_actual(
-        self,
-        clause: CovenantClause,
-        transactions: List[TransactionRecord],
-        audit: Optional[AuditAdjustment] = None
-    ) -> Tuple[List[TransactionRecord], float]:
-
-        # Categorize numerator transactions via contract clause definition
-        numerator_txns = self.categorizer.categorize(
-            definition=clause.numerator_definition,
-            transactions=transactions,
-            metric_type=clause.metric_name
-        )
-
-        numerator_sum = self._sum_usd(numerator_txns)
-
-        # Apply capex audit reclassification only if clause explicitly references audit adjustments
-        if clause.references_audit_adjustment and audit:
-            numerator_sum += audit.capex_reclassifications_total
-
-        # Categorize denominator transactions if test is ratio-based
-        if clause.denominator_definition:
-            denominator_txns = self.categorizer.categorize(
-                definition=clause.denominator_definition,
-                transactions=transactions,
-                metric_type="RATIO_TEST"
-            )
-            denominator_sum = self._sum_usd(denominator_txns)
-
-            if denominator_sum > 0:
-                return numerator_txns, round(numerator_sum / denominator_sum, 2)
-
-        return numerator_txns, numerator_sum
-
-    def _compute_63_actual(
-        self,
-        clause: CovenantClause,
-        transactions: List[TransactionRecord],
-        kyc: Optional[KYCDossierInfo] = None
-    ) -> Tuple[List[TransactionRecord], float]:
-
-        # Filter strictly using KYC beneficial ownership entities (>=20% voting rights)
-        related_entities = kyc.related_parties_20plus if (kyc and kyc.related_parties_20plus) else (kyc.related_parties if kyc else [])
-
-        related_txns = []
-        if related_entities:
-            for t in transactions:
-                for entity in related_entities:
-                    if is_entity_match(t.counterparty, entity) or entity.lower() in t.description.lower():
-                        related_txns.append(t)
-                        break
-
-        if related_txns:
-            return related_txns, self._sum_usd(related_txns)
+        return numerator_txns, round(numerator_sum, 2)
 
         # Fallback to categorizer for clause 6.3 if KYC dossier doesn't yield entity match
         cat_txns = self.categorizer.categorize(

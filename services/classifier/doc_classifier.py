@@ -104,10 +104,10 @@ class DocumentClassifier:
         text_lower = text.lower()
 
         # Check explicit document headers first
-        if "договор банковского займа" in header_text or "договор займа" in header_text:
+        if "договор банковского займа" in header_text or "договор займа" in header_text or "кредитный договор" in header_text or "заём №" in header_text or "заем №" in header_text:
             return DocType.LOAN_AGREEMENT
 
-        if "аудитор" in header_text or "примечания к финансовой отчётности" in header_text or "аудиторское заключение" in header_text or "независимый аудитор" in header_text:
+        if "аудитор" in header_text or "примечания к финансовой отчётности" in header_text or "аудиторское заключение" in header_text or "аудиторская записка" in header_text or "независимый аудитор" in header_text:
             return DocType.AUDIT_NOTE
 
         if "досье контрагента" in header_text or "проверка контрагента" in header_text or "kyc" in header_text or "аффилированным лицам" in header_text:

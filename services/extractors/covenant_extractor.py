@@ -36,8 +36,7 @@ class CovenantExtractor:
         account_id = doc.account_id or "UNKNOWN"
         company_name = doc.company_name or "UNKNOWN"
 
-        snippet = self._extract_covenant_body(text)
-        covenants_map = self._extract_covenants_from_text(snippet, account_id, company_name)
+        covenants_map = self._extract_covenants_from_text(text, account_id, company_name)
 
         return CovenantExtractionResult(
             account_id=account_id,
@@ -61,16 +60,18 @@ class CovenantExtractor:
             escaped_key = re.escape(clause_key)
             pattern = rf"(?:Пункт|Clause|Section|^|\n)\s*{escaped_key}[\s\.\s][\s\S]{{1,1500}}(?=(?:(?:Пункт|Clause|Section|\n)\s*6\.[123]|Статья|Article|\Z))"
             match = re.search(pattern, snippet, re.IGNORECASE)
-
             if match:
                 raw_clause_text = match.group(0).strip()
+                # Strip clause number header (e.g. "6.1.") to prevent threshold regex matching the clause number itself
+                clean_text = re.sub(rf"^(?:Пункт|Clause|Section|\n)?\s*{escaped_key}[\s\.\:]*", "", raw_clause_text, flags=re.IGNORECASE).strip()
 
-                # Extract threshold number
+                # Extract threshold float number (Currency Amount or Ratio multiplier)
                 threshold = 0.0
-                ratio_match = re.search(r"(\d+\.\d+)x", raw_clause_text, re.IGNORECASE)
-                amount_match = re.search(r"\$\s*([\d,]+(?:\.\d+)?)", raw_clause_text)
+                ratio_match = re.search(r"(\d+\.\d+)\s*[xх]?", clean_text, re.IGNORECASE)
+                amount_match = re.search(r"\$\s*([\d,]+(?:\.\d+)?)", clean_text, re.IGNORECASE)
 
-                if clause_key == "6.1":
+                text_lower = clean_text.lower()
+                if "коэффициент" in text_lower or "отношение" in text_lower or "ratio" in text_lower or "доля" in text_lower:
                     if ratio_match:
                         threshold = float(ratio_match.group(1))
                     elif amount_match:

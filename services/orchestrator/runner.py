@@ -166,27 +166,19 @@ class PipelineRunner:
         if not docs:
             return None
 
-        # Filter strictly for active 2025 loan contracts
-        active_agreements = []
+        # Filter out voided, inactive, or superseded documents
+        valid_agreements = []
         for d in docs:
             text_lower = (d.raw_text or "").lower()
-            if "договор банковского займа" in text_lower or "договор займа" in text_lower or "кредитный договор" in text_lower:
-                if "недействующая" not in text_lower and "не применяется" not in text_lower and "старая редакция" not in text_lower:
-                    active_agreements.append(d)
+            if "недействующая" not in text_lower and "не применяется" not in text_lower and "старая редакция" not in text_lower and "расторгнут" not in text_lower:
+                valid_agreements.append(d)
 
-        if not active_agreements:
-            active_agreements = [
-                d for d in docs
-                if "недействующая" not in (d.raw_text or "").lower()
-                and "не применяется" not in (d.raw_text or "").lower()
-            ]
+        if not valid_agreements:
+            valid_agreements = docs
 
-        if not active_agreements:
-            active_agreements = docs
-
-        # Prefer candidate referencing the 2025 fiscal year / period
-        for d in active_agreements:
-            if "2025" in (d.raw_text or "") or "2025-01-01" in (d.raw_text or ""):
+        # Prefer document referencing active 2025 period
+        for d in valid_agreements:
+            if "2025" in (d.raw_text or ""):
                 return d
 
-        return active_agreements[0]
+        return valid_agreements[0]
