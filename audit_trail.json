@@ -52,8 +52,8 @@
       "metric_name": "GENERIC",
       "operator": "<=",
       "threshold": 0.0,
-      "status": "BREACH",
-      "actual": 1202107.45,
+      "status": "COMPLIANT",
+      "actual": 0.0,
       "evidence_txn_id": null,
       "source_doc": "8d878af064f2.pdf",
       "auditor_exclusions": [
@@ -132,10 +132,11 @@
       "actual": 0.0,
       "evidence_txn_id": null,
       "source_doc": "85afaaca89ad.pdf",
-      "auditor_exclusions": [],
+      "auditor_exclusions": [
+        "TXN-P1-0045"
+      ],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "LLP",
         "Shymkent Plant Services LLP"
       ],
       "txns_evaluated_count": 55,
@@ -153,10 +154,11 @@
       "actual": 0.0,
       "evidence_txn_id": null,
       "source_doc": "85afaaca89ad.pdf",
-      "auditor_exclusions": [],
+      "auditor_exclusions": [
+        "TXN-P1-0045"
+      ],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "LLP",
         "Shymkent Plant Services LLP"
       ],
       "txns_evaluated_count": 55,
@@ -170,18 +172,19 @@
       "metric_name": "GENERIC",
       "operator": "<=",
       "threshold": 0.0,
-      "status": "BREACH",
-      "actual": 4218006.51,
-      "evidence_txn_id": "TXN-P3-0028",
+      "status": "COMPLIANT",
+      "actual": 0.0,
+      "evidence_txn_id": null,
       "source_doc": "85afaaca89ad.pdf",
-      "auditor_exclusions": [],
+      "auditor_exclusions": [
+        "TXN-P1-0045"
+      ],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "LLP",
         "Shymkent Plant Services LLP"
       ],
       "txns_evaluated_count": 55,
-      "evidence_explanation": "Single marginal transaction TXN-P3-0028 flips compliance verdict to COMPLIANT when removed."
+      "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
       "scenario_id": "P4",
@@ -198,8 +201,7 @@
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "т\nACC-7804\nРегистрационный\nномер досье\nKYC-ACC-7804-2025\nДата проверки\n31 декабря 2025 года\nПодготовлено\nУправление финансового мониторинга и комплаенса\nБенефициарное владение и контроль\nНиже приведены прямые и косвенные доли участия Группы в организациях-контрагентах по\nсостоянию на дату проверки.\nОрганизация\nДоля голосующих прав\nAktobe Elevator Services LLP",
-        "LLP"
+        "Aral Capital Partners, LLP"
       ],
       "txns_evaluated_count": 57,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
@@ -219,8 +221,7 @@
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "т\nACC-7804\nРегистрационный\nномер досье\nKYC-ACC-7804-2025\nДата проверки\n31 декабря 2025 года\nПодготовлено\nУправление финансового мониторинга и комплаенса\nБенефициарное владение и контроль\nНиже приведены прямые и косвенные доли участия Группы в организациях-контрагентах по\nсостоянию на дату проверки.\nОрганизация\nДоля голосующих прав\nAktobe Elevator Services LLP",
-        "LLP"
+        "Aral Capital Partners, LLP"
       ],
       "txns_evaluated_count": 57,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
@@ -233,18 +234,17 @@
       "metric_name": "GENERIC",
       "operator": "<=",
       "threshold": 0.0,
-      "status": "BREACH",
-      "actual": 4431662.19,
-      "evidence_txn_id": "TXN-P4-0054",
+      "status": "COMPLIANT",
+      "actual": 0.0,
+      "evidence_txn_id": null,
       "source_doc": "3a4aa2dbd6c4.pdf",
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "т\nACC-7804\nРегистрационный\nномер досье\nKYC-ACC-7804-2025\nДата проверки\n31 декабря 2025 года\nПодготовлено\nУправление финансового мониторинга и комплаенса\nБенефициарное владение и контроль\nНиже приведены прямые и косвенные доли участия Группы в организациях-контрагентах по\nсостоянию на дату проверки.\nОрганизация\nДоля голосующих прав\nAktobe Elevator Services LLP",
-        "LLP"
+        "Aral Capital Partners, LLP"
       ],
       "txns_evaluated_count": 57,
-      "evidence_explanation": "Single marginal transaction TXN-P4-0054 flips compliance verdict to COMPLIANT when removed."
+      "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
       "scenario_id": "P5",
@@ -261,7 +261,7 @@
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "Sarybel Capital LLP."
+        "Sarybel Capital LLP"
       ],
       "txns_evaluated_count": 54,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
@@ -281,7 +281,7 @@
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "Sarybel Capital LLP."
+        "Sarybel Capital LLP"
       ],
       "txns_evaluated_count": 54,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
@@ -294,17 +294,17 @@
       "metric_name": "GENERIC",
       "operator": "<=",
       "threshold": 0.0,
-      "status": "BREACH",
-      "actual": 273418.66,
-      "evidence_txn_id": "TXN-P5-0004",
+      "status": "COMPLIANT",
+      "actual": 0.0,
+      "evidence_txn_id": null,
       "source_doc": "1d262694c308.pdf",
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "Sarybel Capital LLP."
+        "Sarybel Capital LLP"
       ],
       "txns_evaluated_count": 54,
-      "evidence_explanation": "Single marginal transaction TXN-P5-0004 flips compliance verdict to COMPLIANT when removed."
+      "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
       "scenario_id": "P6",
@@ -375,7 +375,7 @@
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "Atyrau Pump Station Services LLP"
+        "Atyrau Holding Group L.L.P."
       ],
       "txns_evaluated_count": 56,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
@@ -395,7 +395,7 @@
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "Atyrau Pump Station Services LLP"
+        "Atyrau Holding Group L.L.P."
       ],
       "txns_evaluated_count": 56,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
@@ -408,17 +408,17 @@
       "metric_name": "GENERIC",
       "operator": "<=",
       "threshold": 0.0,
-      "status": "BREACH",
-      "actual": 6418003.77,
-      "evidence_txn_id": "TXN-P7-0031",
+      "status": "COMPLIANT",
+      "actual": 0.0,
+      "evidence_txn_id": null,
       "source_doc": "6acb5bbc3e70.pdf",
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "Atyrau Pump Station Services LLP"
+        "Atyrau Holding Group L.L.P."
       ],
       "txns_evaluated_count": 56,
-      "evidence_explanation": "Single marginal transaction TXN-P7-0031 flips compliance verdict to COMPLIANT when removed."
+      "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
       "scenario_id": "P8",
@@ -435,10 +435,9 @@
       "auditor_exclusions": [
         "TXN-P8-0016"
       ],
-      "auditor_addbacks": 342118.65,
+      "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "т\nACC-7808\nРегистрационный\nномер досье\nKYC-ACC-7808-2025\nДата проверки\n31 декабря 2025 года\nПодготовлено\nУправление финансового мониторинга и комплаенса\nБенефициарное владение и контроль\nНиже приведены прямые и косвенные доли участия Группы в организациях-контрагентах по\nсостоянию на дату проверки.\nОрганизация\nДоля голосующих прав\nKyzylorda Drilling Personnel LLP",
-        "LLP"
+        "Syrdarya Capital Holding, LLP"
       ],
       "txns_evaluated_count": 54,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
@@ -458,10 +457,9 @@
       "auditor_exclusions": [
         "TXN-P8-0016"
       ],
-      "auditor_addbacks": 342118.65,
+      "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "т\nACC-7808\nРегистрационный\nномер досье\nKYC-ACC-7808-2025\nДата проверки\n31 декабря 2025 года\nПодготовлено\nУправление финансового мониторинга и комплаенса\nБенефициарное владение и контроль\nНиже приведены прямые и косвенные доли участия Группы в организациях-контрагентах по\nсостоянию на дату проверки.\nОрганизация\nДоля голосующих прав\nKyzylorda Drilling Personnel LLP",
-        "LLP"
+        "Syrdarya Capital Holding, LLP"
       ],
       "txns_evaluated_count": 54,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
@@ -474,20 +472,19 @@
       "metric_name": "GENERIC",
       "operator": "<=",
       "threshold": 0.0,
-      "status": "BREACH",
-      "actual": 2418663.27,
-      "evidence_txn_id": "TXN-P8-0005",
+      "status": "COMPLIANT",
+      "actual": 0.0,
+      "evidence_txn_id": null,
       "source_doc": "61dfc54675dc.pdf",
       "auditor_exclusions": [
         "TXN-P8-0016"
       ],
-      "auditor_addbacks": 342118.65,
+      "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "т\nACC-7808\nРегистрационный\nномер досье\nKYC-ACC-7808-2025\nДата проверки\n31 декабря 2025 года\nПодготовлено\nУправление финансового мониторинга и комплаенса\nБенефициарное владение и контроль\nНиже приведены прямые и косвенные доли участия Группы в организациях-контрагентах по\nсостоянию на дату проверки.\nОрганизация\nДоля голосующих прав\nKyzylorda Drilling Personnel LLP",
-        "LLP"
+        "Syrdarya Capital Holding, LLP"
       ],
       "txns_evaluated_count": 54,
-      "evidence_explanation": "Single marginal transaction TXN-P8-0005 flips compliance verdict to COMPLIANT when removed."
+      "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
       "scenario_id": "P9",
@@ -501,14 +498,12 @@
       "actual": 0.0,
       "evidence_txn_id": null,
       "source_doc": "c2c9382c9168.pdf",
-      "auditor_exclusions": [
-        "TXN-P9-0025"
-      ],
+      "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "Ural Haul Systems LLP"
+        "Ulytau Capital LLP."
       ],
-      "txns_evaluated_count": 54,
+      "txns_evaluated_count": 55,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
@@ -523,14 +518,12 @@
       "actual": 0.0,
       "evidence_txn_id": null,
       "source_doc": "c2c9382c9168.pdf",
-      "auditor_exclusions": [
-        "TXN-P9-0025"
-      ],
+      "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "Ural Haul Systems LLP"
+        "Ulytau Capital LLP."
       ],
-      "txns_evaluated_count": 54,
+      "txns_evaluated_count": 55,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
@@ -541,19 +534,17 @@
       "metric_name": "GENERIC",
       "operator": "<=",
       "threshold": 0.0,
-      "status": "BREACH",
-      "actual": 1204663.28,
-      "evidence_txn_id": "TXN-P9-0035",
+      "status": "COMPLIANT",
+      "actual": 0.0,
+      "evidence_txn_id": null,
       "source_doc": "c2c9382c9168.pdf",
-      "auditor_exclusions": [
-        "TXN-P9-0025"
-      ],
+      "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
-        "Ural Haul Systems LLP"
+        "Ulytau Capital LLP."
       ],
-      "txns_evaluated_count": 54,
-      "evidence_explanation": "Single marginal transaction TXN-P9-0035 flips compliance verdict to COMPLIANT when removed."
+      "txns_evaluated_count": 55,
+      "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
       "scenario_id": "P10",
@@ -569,10 +560,7 @@
       "source_doc": "ba475cfc33a4.pdf",
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
-      "kyc_related_entities": [
-        "LLP",
-        "Saryarka Terminal Properties LLP"
-      ],
+      "kyc_related_entities": [],
       "txns_evaluated_count": 59,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
@@ -590,10 +578,7 @@
       "source_doc": "ba475cfc33a4.pdf",
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
-      "kyc_related_entities": [
-        "LLP",
-        "Saryarka Terminal Properties LLP"
-      ],
+      "kyc_related_entities": [],
       "txns_evaluated_count": 59,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
@@ -605,18 +590,15 @@
       "metric_name": "GENERIC",
       "operator": "<=",
       "threshold": 0.0,
-      "status": "BREACH",
-      "actual": 1204663.28,
-      "evidence_txn_id": "TXN-P10-0021",
+      "status": "COMPLIANT",
+      "actual": 0.0,
+      "evidence_txn_id": null,
       "source_doc": "ba475cfc33a4.pdf",
       "auditor_exclusions": [],
       "auditor_addbacks": 0.0,
-      "kyc_related_entities": [
-        "LLP",
-        "Saryarka Terminal Properties LLP"
-      ],
+      "kyc_related_entities": [],
       "txns_evaluated_count": 59,
-      "evidence_explanation": "Single marginal transaction TXN-P10-0021 flips compliance verdict to COMPLIANT when removed."
+      "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
       "scenario_id": "B1",
@@ -630,12 +612,14 @@
       "actual": 0.0,
       "evidence_txn_id": null,
       "source_doc": "b38facf69a94.pdf",
-      "auditor_exclusions": [],
+      "auditor_exclusions": [
+        "TXN-B1-0023"
+      ],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
         "Ertis Capital, LLP"
       ],
-      "txns_evaluated_count": 57,
+      "txns_evaluated_count": 56,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
@@ -650,12 +634,14 @@
       "actual": 0.0,
       "evidence_txn_id": null,
       "source_doc": "b38facf69a94.pdf",
-      "auditor_exclusions": [],
+      "auditor_exclusions": [
+        "TXN-B1-0023"
+      ],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
         "Ertis Capital, LLP"
       ],
-      "txns_evaluated_count": 57,
+      "txns_evaluated_count": 56,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
@@ -666,17 +652,19 @@
       "metric_name": "GENERIC",
       "operator": "<=",
       "threshold": 0.0,
-      "status": "BREACH",
-      "actual": 307018.08,
-      "evidence_txn_id": "TXN-B1-0030",
+      "status": "COMPLIANT",
+      "actual": 0.0,
+      "evidence_txn_id": null,
       "source_doc": "b38facf69a94.pdf",
-      "auditor_exclusions": [],
+      "auditor_exclusions": [
+        "TXN-B1-0023"
+      ],
       "auditor_addbacks": 0.0,
       "kyc_related_entities": [
         "Ertis Capital, LLP"
       ],
-      "txns_evaluated_count": 57,
-      "evidence_explanation": "Single marginal transaction TXN-B1-0030 flips compliance verdict to COMPLIANT when removed."
+      "txns_evaluated_count": 56,
+      "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
     {
       "scenario_id": "B4",
@@ -694,9 +682,7 @@
         "TXN-B4-0026"
       ],
       "auditor_addbacks": 0.0,
-      "kyc_related_entities": [
-        "Kazyna Capital LLP."
-      ],
+      "kyc_related_entities": [],
       "txns_evaluated_count": 56,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
@@ -716,9 +702,7 @@
         "TXN-B4-0026"
       ],
       "auditor_addbacks": 0.0,
-      "kyc_related_entities": [
-        "Kazyna Capital LLP."
-      ],
+      "kyc_related_entities": [],
       "txns_evaluated_count": 56,
       "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     },
@@ -730,19 +714,17 @@
       "metric_name": "GENERIC",
       "operator": "<=",
       "threshold": 0.0,
-      "status": "BREACH",
-      "actual": 303949.09,
-      "evidence_txn_id": "TXN-B4-0009",
+      "status": "COMPLIANT",
+      "actual": 0.0,
+      "evidence_txn_id": null,
       "source_doc": "bc5451f75caf.pdf",
       "auditor_exclusions": [
         "TXN-B4-0026"
       ],
       "auditor_addbacks": 0.0,
-      "kyc_related_entities": [
-        "Kazyna Capital LLP."
-      ],
+      "kyc_related_entities": [],
       "txns_evaluated_count": 56,
-      "evidence_explanation": "Single marginal transaction TXN-B4-0009 flips compliance verdict to COMPLIANT when removed."
+      "evidence_explanation": "Aggregate/ratio test or no single transaction flips verdict."
     }
   ]
 }

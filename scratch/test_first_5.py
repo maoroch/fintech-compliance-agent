@@ -67,35 +67,42 @@ def run_test_first_5():
         
         txns = ledger_service.get_transactions_for_account(acc_id)
         
-        covenant_evals = decision_engine.evaluate_covenants(
-            scenario_id=scen_id,
-            covenants=cov_res,
-            audit_adjustments=audit_adj,
-            ledger_transactions=txns
-        )
+        covenant_evals = {}
+        if cov_res and cov_res.covenants:
+            for cl_key, clause in cov_res.covenants.items():
+                covenant_evals[f"clause_{cl_key.replace('.', '_')}"] = decision_engine.evaluate_covenant(
+                    clause=clause,
+                    transactions=txns,
+                    audit=audit_adj
+                )
         
+        gt_covs = gt_scen.get("covenants", {})
         print(f"\nScenario {scen_id} (Account: {acc_id}):")
-        for cl_key in ["clause_6_1", "clause_6_2", "clause_6_3"]:
-            cl_eval = covenant_evals[cl_key]
-            gt_clause = gt_scen[cl_key]
+        for cl_raw in ["6.1", "6.2", "6.3"]:
+            cl_key = f"clause_{cl_raw.replace('.', '_')}"
+            if cl_key not in covenant_evals:
+                continue
+            eval_res = covenant_evals[cl_key]
+            gt_clause = gt_covs.get(cl_raw, {})
+            if not gt_clause:
+                print(f"  [{cl_key}]: Status={eval_res.status} | Calc={eval_res.actual:,.2f}")
+                continue
+            gt_status = gt_clause.get("status", "COMPLIANT")
+            gt_actual = gt_clause.get("actual", 0.0)
             
-            calc_val = cl_eval.actual_value
-            gt_val = gt_clause.get("actual_value", 0.0)
+            st_match = (eval_res.status == gt_status)
+            val_match = abs(eval_res.actual - gt_actual) < 0.05
             
-            calc_st = cl_eval.status.value if hasattr(cl_eval.status, "value") else str(cl_eval.status)
-            gt_st = gt_clause.get("status")
-            
-            diff = abs(calc_val - gt_val)
-            match_str = "EXACT MATCH ✓" if diff < 0.01 and calc_st == gt_st else f"DIFF: calc={calc_val}, gt={gt_val}"
-            
-            if diff < 0.01 and calc_st == gt_st:
+            if st_match and val_match:
+                print(f"  [{cl_key}]: Status={eval_res.status} (GT={gt_status}) | Calc={eval_res.actual:,.2f} | GT={gt_actual:,.2f} -> EXACT MATCH ✓")
                 exact_matches += 1
+            else:
+                print(f"  [{cl_key}]: Status={eval_res.status} (GT={gt_status}) | Calc={eval_res.actual:,.2f} | GT={gt_actual:,.2f} -> DIFF: calc={eval_res.actual}, gt={gt_actual}")
             total_checks += 1
-            
-            print(f"  [{cl_key}]: Status={calc_st} (GT={gt_st}) | Calc={calc_val:,.2f} | GT={gt_val:,.2f} -> {match_str}")
 
+    perc = (exact_matches / total_checks * 100) if total_checks > 0 else 0.0
     print("\n----------------------------------------------------------")
-    print(f"SUMMARY FIRST 5 SCENARIOS: {exact_matches}/{total_checks} exact matches ({exact_matches/total_checks*100:.1f}%)")
+    print(f"SUMMARY FIRST 5 SCENARIOS: {exact_matches}/{total_checks} exact matches ({perc:.1f}%)")
     print("----------------------------------------------------------")
 
 if __name__ == "__main__":

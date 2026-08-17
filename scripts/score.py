@@ -59,8 +59,10 @@ def score_submission(submission_path: str = "submission.json", ground_truth_path
             status_score = 0.50
 
             # 2. Actual Evaluation (0.30 points)
-            if sub_actual is None or gt_actual == 0.0:
+            if sub_actual is None:
                 rel_error = 1.0
+            elif gt_actual == 0.0:
+                rel_error = 0.0 if abs(sub_actual) < 0.01 else 1.0
             else:
                 rel_error = abs(sub_actual - gt_actual) / abs(gt_actual)
 
@@ -89,6 +91,9 @@ def score_submission(submission_path: str = "submission.json", ground_truth_path
 
     print("=" * 60)
     print(f"LOCAL SCORE EVALUATION (Ground Truth Benchmark)")
+    print("=" * 60)
+    for cd in cell_details:
+        print(f"  Cell {cd['cell']:<12}: StatusMatch={cd['status_match']} | Score={cd['score']:.2f}")
     print("=" * 60)
     print(f"Scenarios evaluated : {len(gt_scenarios)}")
     print(f"Total cells          : {total_possible}")
